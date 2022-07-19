@@ -4,11 +4,10 @@ public class CoffeeMachine {
     static Scanner input = new Scanner(System.in);
     static String query;
     static int moneyMade = 550;
-    static int disposableCup = 9;
+    static int disposableCup = 10;
     static int milkAvailable = 540;
     static int waterAvailable = 400;
     static int coffeeBeansAvailable = 120;
-
 
     public static void main(String[] args) {
        menu();
@@ -31,13 +30,18 @@ public class CoffeeMachine {
                     break;
                 case "remaining":
                     printAvailableResources();
+                    break;
             }
         }
         while (!(query.equals("exit")));
     }
 
     public static void buy(){
-        System.out.println("what do you want to buy? 1- espresso, 2- latte, 3- cappuccino, back for main menu:");
+        System.out.println("Select the coffee you want to buy:" +
+                "\n1- espresso coffee" +
+                "\n2- latte coffee" +
+                "\n3- cappuccino coffee" +
+                "\n4- main menu");
         String coffeeType = input.next();
 
         switch (coffeeType){
@@ -50,10 +54,10 @@ public class CoffeeMachine {
                     coffeeBeansAvailable -= coffeeBeansRequired;
                     --disposableCup;
                     moneyMade += 4;
-                    System.out.println("i have enough resources, making your coffee!" + "\n");
+                    System.out.println("I have enough resources, making your espresso coffee!" + "\n");
                 }
                 else
-                    System.out.println("sorry, can't make a coffee \n" + "no enough ingredient" + "\n");
+                    System.out.println("Sorry, can't make your espresso coffee \n" + "No enough ingredient" + "\n");
                 break;
 
             case "2":
@@ -67,10 +71,10 @@ public class CoffeeMachine {
                     coffeeBeansAvailable -= coffeeBeansRequired;
                     --disposableCup;
                     moneyMade += 7;
-                    System.out.println("i have enough resources, making your coffee!"+ "\n");
+                    System.out.println("Your latte coffee is being served!"+ "\n");
                 }
                 else
-                    System.out.println("sorry, can't make a coffee \n" + "no enough ingredient" + "\n");
+                    System.out.println("Sorry, can't make your latte coffee \n" + "Insufficient resources" + "\n");
                 break;
 
             case "3":
@@ -84,13 +88,18 @@ public class CoffeeMachine {
                    coffeeBeansAvailable -= coffeeBeansRequired;
                    --disposableCup;
                    moneyMade += 6;
-                   System.out.println("i have enough resources, making your coffee!" + "\n");
+                   System.out.println("Please be patient, your creamy cappuccino coffee will be ready soon!" + "\n");
                }
                else
-                   System.out.println("sorry, can't make a coffee \n" + "no enough ingredient"+ "\n");
+                   System.out.println("Oops, can't make your cappuccino coffee \n" + "I'm out of resources "+ "\n");
+                break;
+
+            case "4":
+                menu();
                 break;
 
             default:
+                System.out.println("Invalid input");
                 menu();
         }
     }
@@ -116,7 +125,7 @@ public class CoffeeMachine {
     }
 
     public static void take(){
-        System.out.println("i gave you $550" +"\n");
+        System.out.printf("$%d withdrawn" +"\n\n", moneyMade);
         moneyMade = 0;
     }
 
@@ -126,7 +135,7 @@ public class CoffeeMachine {
                         + "%d ml of milk\n"
                         + "%d g of coffee beans\n"
                         + "%d cups of disposable cups\n"
-                        +"$%d of money\n\n",
+                        +"$%d cash\n\n",
                 waterAvailable, milkAvailable, coffeeBeansAvailable,disposableCup,moneyMade);
     }
 }
